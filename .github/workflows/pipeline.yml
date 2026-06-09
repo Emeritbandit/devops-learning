@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  testy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz kod
+        uses: actions/checkout@v3
+
+      - name: Zainstaluj Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Zainstaluj zależności
+        run: pip install flask pytest
+
+      - name: Uruchom testy
+        run: pytest tests/ -v
